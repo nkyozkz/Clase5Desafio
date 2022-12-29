@@ -1,4 +1,4 @@
-const pd = require("pd");
+const fs = require("fs");
 
 function requiredParameter(parameterName) {
     throw new Error(`El Parametro ${parameterName} no fue ingresado`);
@@ -14,7 +14,7 @@ class ProductManager {
 
     getProducts() {
     try {
-        const data = JSON.parse(pd.readFileSync(`${this.path + this.fileName}`));
+        const data = JSON.parse(fs.readFileSync(`${this.path + this.fileName}`));
         return data;
     } catch (error) {
         console.log(
@@ -25,7 +25,7 @@ class ProductManager {
     }
 
     writeProducts(productsToPost) {
-    pd.writeFileSync(
+    fs.writeFileSync(
         `${this.path + this.fileName}`,
         JSON.stringify(productsToPost)
     );
